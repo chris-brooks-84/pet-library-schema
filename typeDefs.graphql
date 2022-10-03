@@ -1,3 +1,60 @@
 type Query {
-  gnar: String!
+  totalPets(status: PetStatus): Int!
+  allPets(category: PetType, status: PetStatus): [Pet!]!
+  petById(id: ID!): Pet!
+  totalCustomers: Int!
+  allCustomers: [Customer!]!
+}
+
+type Mutation {
+  createAccount(input: CreateAccountInput!) : Customer!
+  login(username: String!, password: String!) : LoginPayload!
+}
+
+input CreateAccountInput {
+  name: String!
+  username: ID!
+  password: String!
+}
+
+type LoginPayload {
+  customer: Customer
+  token: String!
+}
+
+type Pet {
+  id: ID!
+  name: String!
+  weight: Float!
+  category: PetType!
+  photo: Photo!
+  status: PetStatus!
+  inCareOf: Customer
+}
+
+scalar Email
+
+type Customer {
+  email: Email!,
+  username: ID!,
+  name: String!,
+  currentPets: [Pet!]!
+}
+
+type Photo {
+  full: String
+  thumb: String
+}
+
+enum PetType {
+  DOG,
+  CAT,
+  BIRD,
+  FISH,
+  DRAGON
+}
+
+enum PetStatus {
+  AVAILABLE
+  CHECKED_OUT
 }
