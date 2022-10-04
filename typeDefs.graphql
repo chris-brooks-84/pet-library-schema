@@ -9,6 +9,7 @@ type Query {
 type Mutation {
   createAccount(input: CreateAccountInput!) : Customer!
   login(username: String!, password: String!) : LoginPayload!
+  checkout(id: ID!) : CheckoutPayload!
 }
 
 input CreateAccountInput {
@@ -33,12 +34,15 @@ type Pet {
 }
 
 scalar Email
+scalar Date
 
 type Customer {
   email: Email!,
   username: ID!,
   name: String!,
   currentPets: [Pet!]!
+  cateCreatd : Date,
+  checkoutHistory: [Checkout!]!
 }
 
 type Photo {
@@ -57,4 +61,17 @@ enum PetType {
 enum PetStatus {
   AVAILABLE
   CHECKED_OUT
+}
+
+type CheckoutPayload {
+  customer: Customer!
+  pet: Pet!
+  checkoutDate: Date!
+}
+
+type Checkout {
+  pet: Pet
+  checkoutDate: Date!
+  checkinDate: Date!
+  late: Boolean
 }

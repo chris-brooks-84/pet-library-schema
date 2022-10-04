@@ -14,7 +14,8 @@ const mocks = {
     name: "Christopher"
   }
   ),
-  Email: () => "what you talking about Willis?"
+  Email: () => "what you talking about Willis?",
+  Date: () => "good date"
 }
 //const server = new ApolloServer({ typeDefs, mocks: true });
 const server = new ApolloServer({ typeDefs, mocks });
